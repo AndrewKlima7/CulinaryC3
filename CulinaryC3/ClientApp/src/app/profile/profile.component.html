@@ -51,14 +51,10 @@
   <!--display list of recipes-->
   <div class="row">
     <div *ngFor="let r of rList | slice:0:5">
-      <div class="col-lg-4 col-md-6" style="max-width: 8rem; min-width: 20rem">
+      <div class="col-lg-4 col-md-6 col-sm-12 center" style="max-width: 8rem; min-width: 20rem;">
         <!--if picture is null -- supply default-->
-        <div class="card secondary-border" *ngIf="r.picture === null">
+        <div class="card secondary-border" *ngIf="r.picture === null; else elseBlock">
           <img class="card-img-top" style="border-radius: 20px;" src="Default_Hat.png" />
-          <!--use photo recipe has-->
-          <!--<a class="card secondary-border" *ngIf="r.picture !== null">
-            <img class="card-img-top" style="border-radius: 20px;" src="{{r.picture}}" />
-          </a>-->
           <div class="card-body">
             <h5 class="card-title">{{r.recipeName}} : {{r.score}}</h5>
             <a class="btn btn-outline-info button-space" [routerLink]="['/detail-recipe', r.id]">View Recipe</a>
@@ -66,6 +62,19 @@
             <button type="button" class="btn btn-outline-danger btn-sm button-space" id="{{r.id}}" (click)="warning(r.id)">Remove Recipe</button>
           </div>
         </div>
+        <!--will display recip with photo user supplies-->
+        <ng-template #elseBlock>
+          <div class="card secondary-border">
+            <img class="card-img-top card-img-size" style="border-radius: 20px;" src="{{r.picture}}" />
+            <div class="card-body">
+              <h5 class="card-title">{{r.recipeName}} : {{r.score}}</h5>
+              <a class="btn btn-outline-info button-space" [routerLink]="['/detail-recipe', r.id]">View Recipe</a>
+              <br />
+              <button type="button" class="btn btn-outline-danger btn-sm button-space" id="{{r.id}}" (click)="warning(r.id)">Remove Recipe</button>
+            </div>
+          </div>
+        </ng-template>
+
       </div>
     </div>
   </div>

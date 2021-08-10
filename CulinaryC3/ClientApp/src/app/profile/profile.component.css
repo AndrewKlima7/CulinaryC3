@@ -11,7 +11,7 @@
 }
 
 .secondary-border {
-  border: solid 3px #53B8BB;
+  border: solid 4px #53B8BB;
   border-radius: 20px;
   background-color: #003638;
 }
@@ -27,4 +27,15 @@ a:hover {
 
 .headding-padding {
   padding-top: 10px;
+}
+
+.card-img-size{
+    height: 281px;
+    width: 280px;
+}
+
+.card {
+  margin: 0 auto; /* Added */
+  float: none; /* Added */
+  margin-bottom: 10px; /* Added */
 }
