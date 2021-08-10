@@ -11,6 +11,8 @@ import { UserService } from '../../UserService';
 })
 /** Login component*/
 export class LoginComponent {
+  bool: boolean;
+  message: string = "";
 
   /** Login ctor */
   constructor(private userService: UserService, private router: Router) {
@@ -18,14 +20,16 @@ export class LoginComponent {
   }
 
   signIn(form: NgForm) {
-    this.userService.leaderboard().subscribe((result) => {
-      for (var i = 0; i < result.length; i++) {
-        if (result[i].loginId.toLowerCase() == form.form.value.email.toLowerCase() && result[i].password == form.form.value.password) {
-          localStorage.setItem('userEmail', result[i].loginId);
-          this.router.navigate(['/app-profile']).then(() => {
-            window.location.reload();
-          });
-        }
+    this.userService.login(form.form.value.password, form.form.value.email).subscribe((r) => {
+      this.bool = r;
+      console.log(this.bool);
+      if (this.bool == true) {
+        localStorage.setItem('userEmail', form.form.value.email);
+        this.router.navigate(['/app-profile']).then(() => {
+          window.location.reload();
+        });
+      } else {
+        this.message = "Incorrect email or password"
       }
     })
   }
