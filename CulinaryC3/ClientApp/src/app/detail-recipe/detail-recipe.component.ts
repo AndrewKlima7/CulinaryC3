@@ -104,18 +104,12 @@ export class DetailRecipeComponent {
   completed(recipeId: number) {
     this.message = "Recipe Complete +5 points!"
     console.log(this.message);
-    this.authorizeServie.getUser().subscribe((result) => {
-      this.userInfo = result.name;
-      console.log(result);
-      console.log(this.userInfo);
-
-
-      this.UserServ.getUserbyLoginId(this.userInfo).subscribe((id) => {
-        this.userId = id.id;
-        console.log(this.userId);
-        this.UserServ.completeRecipe(this.userId);
-      })
-    });
+    this.userInfo = localStorage.getItem('userEmail');
+    this.UserServ.getUserbyLoginId(this.userInfo).subscribe((id) => {
+      this.userId = id.id;
+      console.log(this.userId);
+      this.UserServ.completeRecipe(this.userId);
+    })
 
     console.log(recipeId);
     this.recServ.updateScore(recipeId);
