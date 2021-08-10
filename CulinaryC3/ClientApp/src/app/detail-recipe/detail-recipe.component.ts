@@ -34,11 +34,13 @@ export class DetailRecipeComponent {
   fats: number = 0;
   i: number;
 
-  constructor(private SpoonApi: SpoonacularAPI, private recServ: RecipeService, private UserServ: UserService, private route: ActivatedRoute) {
+  constructor( private SpoonApi: SpoonacularAPI, private recServ: RecipeService, private UserServ: UserService, private route: ActivatedRoute) {
 
     this.UserServ.leaderboard().subscribe((User) => {
       this.u = User; console.log(this.u);
     })
+    this.id = + this.route.snapshot.paramMap.get('id');
+    this.GetRecipeById(this.id);
     this.recServ.getIngredients().subscribe((DBIngredient) => {
       this.dbIngList = DBIngredient;
       this.GetNutritional();
@@ -46,9 +48,7 @@ export class DetailRecipeComponent {
   }
 
   ngOnInit(): void {
-    this.id =+ this.route.snapshot.paramMap.get('id');
-    this.GetRecipeById(this.id);
-    this.GetNutritional();
+
   }
 
   GetNutritional() {
@@ -62,15 +62,25 @@ export class DetailRecipeComponent {
       this.carbs = this.carbs + (this.ingUsed[this.i].carbs);
       this.protein = this.protein + (this.ingUsed[this.i].protein);
       this.fats = this.fats + (this.ingUsed[this.i].fats);
+      console.log(this.fats);
+      console.log(this.i)
+      console.log(this.ingUsed.length)
+      if (this.i === this.ingUsed.length - 1) {
+        this.divide()
+      }
     }
+
+  }
+
+  divide() {
+    console.log("AHH")
     this.calories = this.calories / this.r.servings;
     this.carbs = this.carbs / this.r.servings;
     this.protein = this.protein / this.r.servings;
     this.fats = this.fats / this.r.servings;
   }
 
-  GetRecipeById(id: number)
-  {
+  GetRecipeById(id: number) {
     this.recServ.getRecipeById(id).subscribe((Recipe) => {
       this.r = Recipe;
       console.log(this.r);
@@ -94,20 +104,24 @@ export class DetailRecipeComponent {
   completed(recipeId: number) {
     this.message = "Recipe Complete +5 points!"
     console.log(this.message);
-    this.userInfo = localStorage.getItem('userEmail');
+    this.authorizeServie.getUser().subscribe((result) => {
+      this.userInfo = result.name;
+      console.log(result);
+      console.log(this.userInfo);
+
+
       this.UserServ.getUserbyLoginId(this.userInfo).subscribe((id) => {
         this.userId = id.id;
         console.log(this.userId);
         this.UserServ.completeRecipe(this.userId);
       })
+    });
 
     console.log(recipeId);
     this.recServ.updateScore(recipeId);
   }
 
 
-//  I need to still:
-//    - Do Math :(
-
 }
+
 
