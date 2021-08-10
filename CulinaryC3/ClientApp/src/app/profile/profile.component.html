@@ -3,10 +3,11 @@
   <div class="row" style="border: black solid 5px;">
     <!--will hold the profile information-->
     <div class="col-lg-6 col-md-6 col-sm-12 center">
-      <div *ngIf="img != undefined">
-        <img style="height: 75px; width: 75px" src="{{img}}" />
+      <div *ngIf="leader !== null">
+        <img style="height: 75px; width: 75px" src="{{leader}}" />
       </div>
-      <h2>{{user.title}}, {{user.name}}</h2>
+      <h2>{{user.name}}</h2>
+      <h2>{{user.title}}</h2>
       <img style="height: 200px; width: 200px; border: solid red 5px" src="{{user.picture}}" />
       <div>
         <button routerLink='/authentication/profile'>Account Settings</button>
