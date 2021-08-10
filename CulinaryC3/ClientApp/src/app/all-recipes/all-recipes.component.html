@@ -1,0 +1,36 @@
+<h1>Recipes! </h1>
+<!-- Search by Name: -->
+<div>Search for a recipe by Name</div>
+<input type="text" name="name" [(ngModel)]="name" />
+<input type="submit" (click)="searchRecipeByName(name)" />
+<br />
+<div *ngIf="r != undefined">
+  {{r.recipeName}} <br />
+  <a [routerLink]="['/detail-recipe', r.id]"> More Details </a></div>
+  <br />
+<!--Search by ingredients-->
+<div>Search for recipes by ingredient </div>
+<input type="text" name="ing" [(ngModel)]="ing" />
+<input type="submit" (click)="searchRecipeByIng(ing)" />
+<br />
+<br />
+<div *ngFor="let recipe of foundRecipe">
+  {{recipe.recipeName}} <br />
+  <a [routerLink]="['/detail-recipe', recipe.id]"> More Details </a>
+</div>
+
+<div *ngFor="let r of recipes">
+  <h3>  {{r.recipeName}}  </h3>
+  <div >
+  <button (click)="favorite(r.id)"
+          style="float:left; border:none;
+            background-color: transparent;" id="{{r.id}}"
+          class="rc">
+    <img id="i" class="favButton" src='outlineStar.png' />
+  </button>
+</div>
+  <b>Score: </b>{{r.score}} <br />
+  <a [routerLink]="['/detail-recipe', r.id]"> More Details </a>
+  <div *ngIf="r.servings !== null"> <b> Servings: </b> {{r.servings}}</div>
+  <br />
+</div>

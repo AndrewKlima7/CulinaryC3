@@ -1,0 +1,55 @@
+<div>
+  <h1>Chef Pantry</h1>
+  <div *ngIf="user !== undefined">
+    <p id="new">Welcome {{user.name}} to the Chef Pantry!</p>
+    <p>{{user.title}}</p>
+  </div>
+  <div *ngIf="user === undefined">
+    <p>Welome to the Chef Pantry!</p>
+  </div>
+  <p>Browse titles and avatars you can unlock as you earn points!!</p>
+
+  <div *ngIf="user !== undefined">
+    <form #changename="ngForm" (ngSubmit)="changeName(changename)">
+      <input type="text" name="value" ngModel />
+      <input type="submit" value="Change Name" />
+    </form>
+  </div>
+  <div *ngIf="user === undefined">
+    <p>Login to collect your rewards and change your name</p>
+  </div>
+
+  <h3>Titles:</h3>
+  <div *ngFor="let t of titles">
+    <p>{{t.title}}: points needed = {{t.value}}</p>
+    <button *ngIf="user != undefined && user.score >= t.value" (click)="changeTitle(t.title)">Change Title</button>
+  </div>
+  <br />
+  <h3>Avatars:</h3>
+  <img style="width: 200px; height: 200px" src="{{avatar.image}}" />
+  <button (click)="changeAvatar(avatar.image)">Change Avatar</button>
+  <br />
+  <p>{{avatars1[0].value}} points needed</p>
+  <div *ngFor="let a of avatars1">
+    <img style="width: 200px; height: 200px" src="{{a.image}}" />
+    <button *ngIf="user != undefined && user.score >= a.value" (click)="changeAvatar(a.image)">Change Avatar</button>
+  </div>
+  <br />
+  <p>{{avatars2[0].value}} points needed</p>
+  <div *ngFor="let a of avatars2">
+    <img style="width: 200px; height: 200px" src="{{a.image}}" />
+    <button *ngIf="user != undefined && user.score >= a.value" (click)="changeAvatar(a.image)">Change Avatar</button>
+  </div>
+  <br />
+  <p>{{avatars3[0].value}} points needed</p>
+  <div *ngFor="let a of avatars3">
+    <img style="width: 200px; height: 200px" src="{{a.image}}" />
+    <button *ngIf="user != undefined && user.score >= a.value" (click)="changeAvatar(a.image)">Change Avatar</button>
+  </div>
+  <br />
+  <p>{{avatars4[0].value}} points needed</p>
+  <div *ngFor="let a of avatars4">
+    <img style="width: 200px; height: 200px" src="{{a.image}}" />
+    <button *ngIf="user != undefined && user.score >= a.value" (click)="changeAvatar(a.image)">Change Avatar</button>
+  </div>
+</div>

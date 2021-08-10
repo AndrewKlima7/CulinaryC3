@@ -1,0 +1,38 @@
+
+<h3>List of groups</h3>
+<button id=button (click)="friendsList(); hide()">Invite Friends To Groups</button>
+<br />
+<div *ngIf="message !== null">
+  <p>{{message}}</p>
+</div>
+<br />
+<div *ngIf="groupList !== null">
+  <!--print out the list of groups-->
+  <div style="border: 1px solid black" *ngFor="let g of groupList">
+    <h5>Group Name: {{g.groupName}}</h5>
+    <a [routerLink]="['/detail-group', g.groupId]"> More Details </a>
+    <div *ngIf="g.admin != true">
+      <button (click)="removeSelf(g.groupName)">Remove Self</button>
+    </div>
+    <div *ngIf="g.admin == true">
+      <button (click)="deleteGroup(g.groupName)">Delete Group</button>
+      <button (click)="groupUsers(g.groupName)">Remove User(s)</button>
+      <div *ngIf="gList !== null">
+        <div *ngFor="let e of gList">
+          <button (click)="removeUser(e.id, g.groupName)">Remove {{e.name}}</button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="friendsList !== null">
+      <div *ngFor="let f of fList">
+        <br />
+        <button (click)="inviteFriend(f.id, g.groupName)">Invite {{f.name}}</button>
+        <br />
+      </div>
+    </div>
+  </div>
+</div>
+
+  <button routerLink='/app-new-group'>Add New Group</button>
+
+

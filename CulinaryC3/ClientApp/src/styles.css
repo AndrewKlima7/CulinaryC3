@@ -1,0 +1,36 @@
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #e01a76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+
+.favButton {
+  float: left;
+  height: 20px;
+  width: auto;
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  opacity: 100%;
+}
+
+i {
+  border: 3px solid rgba(0, 0, 0, 0.514);
+}
+
+html, header, body {
+  background-color: #003638;
+  color: #53B8BB;
+}
+
+h1, h2, h3 {
+  color: #F3F2C9;
+}

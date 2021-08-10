@@ -1,0 +1,12 @@
+<h1>Favorites</h1>
+<div *ngIf="message !== null">
+  <p>{{message}}</p>
+</div>
+<br />
+<div *ngIf="fList !== null">
+  <!--print out the list of groups-->
+  <div style="border: 1px solid black" *ngFor="let f of fList">
+    <button class="b3" (click)="removeFavorite(f.id)" style="background-color: transparent;">X</button>
+    <h5>{{f.id}}: {{f.recipeName}}</h5>
+  </div>
+</div>

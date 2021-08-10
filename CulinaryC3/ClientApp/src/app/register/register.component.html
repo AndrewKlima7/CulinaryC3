@@ -1,0 +1,10 @@
+<h2>Registered</h2>
+<form #user="ngForm" (ngSubmit)="createUser(user)">
+  <input type="text" name="email" placeholder="email" ngModel/>
+  <br/>
+  <input type="password" name="password" placeholder="password" ngModel/>
+  <input type="submit" value="Register" />
+</form>
+<div *ngIf="message != undefined">
+  <p>{{message}}</p>
+</div>

@@ -1,0 +1,12 @@
+<h1>Friends</h1>
+<button routerLink='/app-add-friend'>Add Friend</button>
+<div *ngIf="fList !== null">
+  <div *ngIf="message !== null">
+    <p>{{message}}</p>
+  </div>
+  
+  <div style="border: 1px solid black" *ngFor="let u of fList">
+    <h5>{{u.name}}</h5>
+    <button (click)="removeFriend(u.id)">Remove Friend</button>
+  </div>
+</div>
