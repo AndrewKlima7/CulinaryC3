@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-#nullable disable
-
 namespace CulinaryC3.Models
 {
     public partial class Group
@@ -12,7 +10,6 @@ namespace CulinaryC3.Models
         public int? UserId { get; set; }
         public bool? Admin { get; set; }
         public int? Score { get; set; }
-
         public virtual User User { get; set; }
     }
 }

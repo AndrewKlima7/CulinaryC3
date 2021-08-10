@@ -75,7 +75,13 @@ export class ProfileComponent {
     this.friendService.getFriends(this.userId).subscribe((result) => {
       this.fList = result;
       console.log(this.fList);
+      this.sortFriends();
     })
+  }
+
+  sortFriends() {
+    let list = this.fList.sort((a, b) => (a.score < b.score ? 1 : -1));
+    this.fList = list;
   }
 
   //display user recipes
