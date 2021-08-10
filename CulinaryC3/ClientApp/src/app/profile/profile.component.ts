@@ -29,8 +29,7 @@ export class ProfileComponent {
   value: number;
   gList: Group[] = [];
   bool: boolean = true;
-  leader: string = "";
-  img: string = "";
+  leader: string | null = null;
 
   constructor(private userService: UserService,
     private friendService: FriendsService, private recipeService: RecipeService,
@@ -45,19 +44,12 @@ export class ProfileComponent {
         this.user = id;
 
         console.log(this.userId);
-
         userService.leaderboard().subscribe((result2) => {
-          if (result2[0].id == this.userId) {
+          console.log(result2[0].id)
+          if (result2[0].id === this.userId) {
             this.leader = "CCLogo.png"
           }
-
-          this.userService.leaderboard().subscribe((result) => {
-            console.log(result[0]);
-            console.log(this.user);
-            if (result[0].id === this.user.id) {
-              this.img = "CCLogo.png"
-            }
-            console.log(this.img);
+            console.log(this.leader);
             this.displayFriends(this.userId);
             this.displayUserRecipes(this.userId);
             this.getNotifications(this.userId);
@@ -65,7 +57,6 @@ export class ProfileComponent {
           })
         })
         
-      })
 
     
   }
