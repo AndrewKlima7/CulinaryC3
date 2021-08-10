@@ -2,9 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
-// If you have enabled NRTs for your project, then un-comment the following line:
-// #nullable disable
 
 namespace CulinaryC3.Models
 {
@@ -19,13 +16,14 @@ namespace CulinaryC3.Models
         {
         }
 
-        public virtual DbSet<Favorite> Favorite { get; set; }
-        public virtual DbSet<Friends> Friends { get; set; }
-        public virtual DbSet<Group> Group { get; set; }
-        public virtual DbSet<Ingredients> Ingredients { get; set; }
-        public virtual DbSet<Invites> Invites { get; set; }
-        public virtual DbSet<Recipes> Recipes { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Favorite> Favorites { get; set; }
+        public virtual DbSet<Friend> Friends { get; set; }
+        public virtual DbSet<Group> Groups { get; set; }
+        public virtual DbSet<Ingredient> Ingredients { get; set; }
+        public virtual DbSet<Invite> Invites { get; set; }
+        public virtual DbSet<Recipe> Recipes { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -37,15 +35,20 @@ namespace CulinaryC3.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
             modelBuilder.Entity<Favorite>(entity =>
             {
+                entity.ToTable("Favorite");
+
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.Favorite)
+                    .WithMany(p => p.Favorites)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK__Favorite__UserId__6477ECF3");
             });
 
-            modelBuilder.Entity<Friends>(entity =>
+
+            modelBuilder.Entity<Friend>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
 
@@ -57,15 +60,17 @@ namespace CulinaryC3.Models
 
             modelBuilder.Entity<Group>(entity =>
             {
+                entity.ToTable("Group");
+
                 entity.Property(e => e.GroupName).HasMaxLength(50);
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.Group)
+                    .WithMany(p => p.Groups)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK__Group__UserId__5EBF139D");
             });
 
-            modelBuilder.Entity<Ingredients>(entity =>
+            modelBuilder.Entity<Ingredient>(entity =>
             {
                 entity.Property(e => e.Aisle).HasMaxLength(50);
 
@@ -79,14 +84,15 @@ namespace CulinaryC3.Models
                     .HasConstraintName("FK__Ingredien__Recip__6754599E");
             });
 
-            modelBuilder.Entity<Invites>(entity =>
+            modelBuilder.Entity<Invite>(entity =>
             {
                 entity.Property(e => e.InviterEmail).HasMaxLength(50);
 
                 entity.Property(e => e.NameofGroup).HasMaxLength(50);
             });
 
-            modelBuilder.Entity<Recipes>(entity =>
+            modelBuilder.Entity<Recipe>(entity =>
+
             {
                 entity.Property(e => e.RecipeName).HasMaxLength(50);
 
@@ -96,7 +102,8 @@ namespace CulinaryC3.Models
                     .HasConstraintName("FK__Recipes__UserId__619B8048");
             });
 
-            modelBuilder.Entity<Users>(entity =>
+            modelBuilder.Entity<User>(entity =>
+
             {
                 entity.Property(e => e.LoginId).HasMaxLength(450);
 
