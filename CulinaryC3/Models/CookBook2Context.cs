@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-#nullable disable
 
 namespace CulinaryC3.Models
 {
@@ -25,11 +24,11 @@ namespace CulinaryC3.Models
         public virtual DbSet<Recipe> Recipes { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Server=tcp:cc98765.database.windows.net,1433;Initial Catalog=CookBook2;Persist Security Info=False;User ID=CulinaryC;Password=ShrimpTears5;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             }
         }
@@ -47,6 +46,7 @@ namespace CulinaryC3.Models
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK__Favorite__UserId__6477ECF3");
             });
+
 
             modelBuilder.Entity<Friend>(entity =>
             {
@@ -92,6 +92,7 @@ namespace CulinaryC3.Models
             });
 
             modelBuilder.Entity<Recipe>(entity =>
+
             {
                 entity.Property(e => e.RecipeName).HasMaxLength(50);
 
@@ -102,6 +103,7 @@ namespace CulinaryC3.Models
             });
 
             modelBuilder.Entity<User>(entity =>
+
             {
                 entity.Property(e => e.LoginId).HasMaxLength(450);
 
