@@ -57,7 +57,7 @@ export class GroupComponent {
       console.log(this.fList);
 
       for (let i = 0; i < this.fList.length; i++) {
-        this.userService.getUserbyId(this.fList[i].FriendId)
+        this.userService.getUserbyId(this.fList[i].id)
           .subscribe((list) => {
             this.userList.push(list);
           })
