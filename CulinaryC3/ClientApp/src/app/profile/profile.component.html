@@ -3,7 +3,12 @@
   <!--will hold the profile information-->
   <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-12 center">
-      <h2>{{user.title}}, {{user.name}}</h2>
+      <div *ngIf="leader !== null">
+        <img style="height: 75px; width: 75px" src="{{leader}}" />
+      </div>
+      <h2>{{user.name}}</h2>
+      <h2>{{user.title}}</h2>
+      
       <a routerLink="/app-invites">you have {{value}} notifications</a>
       <br />
       <img style="height: 200px; width: 200px;" src="{{user.picture}}" />

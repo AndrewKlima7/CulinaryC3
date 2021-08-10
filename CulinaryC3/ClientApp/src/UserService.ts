@@ -60,4 +60,9 @@ export class UserService {
     let url: string = this.base + `/GetEmail/e=${email}&p=${password}`
     this.http.post<User>(url, {}).subscribe(result => { console.log(result) });
   }
+
+  login(password: string, email: string) {
+    let url: string = this.base + `/pw=${password}&e=${email}/check`;
+    return this.http.post<boolean>(url, {});
+  }
 }

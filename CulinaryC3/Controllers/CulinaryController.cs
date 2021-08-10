@@ -43,17 +43,60 @@ namespace CulinaryC.Controllers
         [HttpPost("GetEmail/e={email}&p={password}")]
         public void AddUser(string email, string password)
         {
+            string newPass = Encrypt(password);
 
             User u = new User();
 
             u.LoginId = email;
-            u.Password = password;
+            u.Password = newPass;
 
             u.Name = null;
             u.Score = 0;
 
             db.Users.Add(u);
             db.SaveChanges();
+        }
+
+        [HttpPost("pw={password}&e={email}/check")]
+        public bool login(string password, string email)
+        {
+            bool login;
+            string npass = Encrypt(password);
+            User u = db.Users.Where(x => x.LoginId.ToLower() == email.ToLower() && x.Password == npass).ToList().First();
+
+            if(u != null)
+            {
+                login = true;
+            }
+            else
+            {
+                login = false;
+            }
+            return login;
+        }
+
+        [HttpGet("pw={input}")]
+        public string Encrypt(string input)
+        {
+            Random r = new Random(input[0]);
+            List<char> output = new List<char>();
+            int minLength = 7;
+            for (int i = 0; i < input.Length; i++)
+            {
+                char c = input[i];
+                c = (char)(c + r.Next(-26, 27));
+                output.Add(c); 
+            }
+            if (output.Count < minLength)
+            {
+                for (int i = output.Count; output.Count < 15; i++)
+                {
+                    string let = Char.ConvertFromUtf32(r.Next(65, 123));
+                    output.Add(let[0]);
+
+                }
+            }
+            return new string(output.ToArray());
         }
 
         [HttpPut("img={img}&u={id}")]
