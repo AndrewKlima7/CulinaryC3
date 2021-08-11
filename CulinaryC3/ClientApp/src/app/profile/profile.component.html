@@ -8,12 +8,17 @@
       </div>
       <h2>{{user.name}}</h2>
       <h2>{{user.title}}</h2>
-      
+
       <a routerLink="/app-invites">you have {{value}} notifications</a>
       <br />
       <img style="height: 200px; width: 200px;" src="{{user.picture}}" />
       <br />
       <h4>Score: {{user.score}}</h4>
+
+      <div *ngIf="numFollowers !== null">
+        <h3>You have {{numFollowers}} followers</h3>
+      </div>
+
       <button type="button" class="btn btn-outline-info button-space" routerLink='/app-pantry'>Profile Settings</button>
       <button type="button" class="btn btn-outline-info button-space" routerLink='/app-account-settings'>Account Settings</button>
     </div>
@@ -39,31 +44,35 @@
 </div>
 
 <!--Second Container hold recipes-->
-<div class="container center main-border">
-  <div class="row">
-    <div class="col center">
-      <div class="center">
-        <h2>Recipe List</h2>
-        <!--add new recipe-->
-        <button type="button" class="btn btn-outline-info button-space" routerLink='/add-recipe'>Add new recipe</button>
-        <!--View Favorites-->
-        <button type="button" class="btn btn-outline-info button-space" routerLink="/app-favorites">View Favorites</button>
-      </div>
+<div class="row">
+  <div class="col center">
+    <div class="center">
+      <h2>Recipe List</h2>
+      <!--add new recipe-->
+      <button type="button" class="btn btn-outline-info button-space" routerLink='/add-recipe'>Add new recipe</button>
+      <!--View Favorites-->
+      <button type="button" class="btn btn-outline-info button-space" routerLink="/app-favorites">View Favorites</button>
     </div>
   </div>
-
-
-  <!--display list of recipes-->
-  <div class="row">
-    <div *ngFor="let r of rList | slice:0:5">
-      <div class="col-lg-4 col-md-6" style="max-width: 8rem; min-width: 20rem">
-        <!--if picture is null -- supply default-->
-        <div class="card secondary-border" *ngIf="r.picture === null">
-          <img class="card-img-top" style="border-radius: 20px;" src="Default_Hat.png" />
-          <!--use photo recipe has-->
-          <!--<a class="card secondary-border" *ngIf="r.picture !== null">
-            <img class="card-img-top" style="border-radius: 20px;" src="{{r.picture}}" />
-          </a>-->
+</div>
+<!--display list of recipes-->
+<div class="row">
+  <div *ngFor="let r of rList | slice:0:5">
+    <div class="col-lg-4 col-md-6 col-sm-12" style="max-width: 8rem; min-width: 20rem;">
+      <!--if picture is null -- supply default-->
+      <div class="card secondary-border" *ngIf="r.picture === null; else elseBlock">
+        <img class="card-img-top" style="border-radius: 20px;" src="Default_Hat.png" />
+        <div class="card-body">
+          <h5 class="card-title">{{r.recipeName}} : {{r.score}}</h5>
+          <a class="btn btn-outline-info button-space" [routerLink]="['/detail-recipe', r.id]">View Recipe</a>
+          <br />
+          <button type="button" class="btn btn-outline-danger btn-sm button-space" id="{{r.id}}" (click)="warning(r.id)">Remove Recipe</button>
+        </div>
+      </div>
+      <!--will display recip with photo user supplies-->
+      <ng-template #elseBlock>
+        <div class="card secondary-border">
+          <img class="card-img-top card-img-size" style="border-radius: 20px;" src="{{r.picture}}" />
           <div class="card-body">
             <h5 class="card-title">{{r.recipeName}} : {{r.score}}</h5>
             <a class="btn btn-outline-info button-space" [routerLink]="['/detail-recipe', r.id]">View Recipe</a>
@@ -71,7 +80,8 @@
             <button type="button" class="btn btn-outline-danger btn-sm button-space" id="{{r.id}}" (click)="warning(r.id)">Remove Recipe</button>
           </div>
         </div>
-      </div>
+      </ng-template>
     </div>
   </div>
 </div>
+

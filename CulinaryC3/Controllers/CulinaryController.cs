@@ -14,6 +14,25 @@ namespace CulinaryC.Controllers
         //Create a Database object
         CookBook2Context db = new CookBook2Context();
 
+        [HttpGet("recipeofday")]
+        public RecipeofDay RecipeOfDay()
+        {
+            int day = DateTime.Today.Day + 1;
+            List<Recipe> r = db.Recipes.ToList();
+
+            Random ran = new Random();
+            int num = ran.Next(0, r.Count + 1);
+
+
+            RecipeofDay d = new RecipeofDay();
+
+            d.recipeId = r[num].Id;
+            d.dayofMonth = day;
+
+            return d;
+        }
+
+
         //if they 'complete' someone else recipe
         [HttpPut("completed/u={id}")]
         public void Completed(int id)
@@ -458,6 +477,13 @@ namespace CulinaryC.Controllers
                 }
             }
             return users;
+        }
+
+        [HttpGet("Allfriends")]
+        public List<Friend> AllFriends()
+        {
+            List<Friend> f = db.Friends.ToList();
+            return f;
         }
 
         //this to get friends data and display that that way I can ensure that if the user already
