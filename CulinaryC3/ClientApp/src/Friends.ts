@@ -12,3 +12,8 @@ export interface Friends {
   recipes: any[];
 }
 
+export interface Friends2 {
+  userId: number;
+  friendId: number;
+}
+
