@@ -1,7 +1,10 @@
 a {
-  color: #0366d6;
+  color: #53B8BB;
 }
 
+  a:hover {
+    color: #4ba1a3;
+  }
 code {
   color: #e01a76;
 }
