@@ -21,7 +21,7 @@ namespace CulinaryC.Controllers
             List<Recipe> r = db.Recipes.ToList();
 
             Random ran = new Random();
-            int num = ran.Next(0, r.Count + 1);
+            int num = ran.Next(0, r.Count);
 
 
             RecipeofDay d = new RecipeofDay();

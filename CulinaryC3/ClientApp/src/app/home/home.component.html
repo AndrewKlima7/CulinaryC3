@@ -4,11 +4,11 @@
   <p>Sign up or log in to start now!</p>
   </div>
   <img style="width:400px; height:inherit" src="CCLogo.png" />
-  <div>
+  <div *ngIf="recipe != null">
     <h1>Recipe of the Day</h1>
-    <h3>{{recipe.recipeName}}</h3>
+    <h3>{{realRecipe.recipeName}}</h3>
 
-    <img src="{{recipe.picture}}" />
-    <p>Score: {{recipe.score}}</p>
-    <p>servings: {{recipe.servings}}</p>
+    <img src="{{realRecipe.picture}}" />
+    <p>Score: {{realRecipe.score}}</p>
+    <p>servings: {{realRecipe.servings}}</p>
   </div>

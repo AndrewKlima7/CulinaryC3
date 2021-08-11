@@ -34,6 +34,9 @@
             <input type="submit" value="Find Ingredient" />
           </form>
           <div *ngIf="ing != null">
+            <p>Did you mean {{ing.name}}?</p>
+          </div>
+          <div *ngIf="ing != null">
             <form #addIngredientForm="ngForm" (ngSubmit)="AddToIngArray(addIngredientForm)">
               <input type="hidden" name="food" value="{{ing.name}}" placeholder="{{ing.name}}" ngModel />
               <input type="hidden" name="recipeID" value="{{ing.id}}" ngModel />
