@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { RecipeofDay } from './RecipeofDay';
 import { User } from './User';
 
 @Injectable()
@@ -84,5 +85,10 @@ export class UserService {
   Winner(userId: number) {
     let url: string = this.base + `/Winner=${userId}`;
     this.http.put(url, {}).subscribe(result => { console.log(result) });
+  }
+
+  recipeday() {
+    let url: string = this.base + `/recipeofday`;
+    return this.http.get<RecipeofDay>(url);
   }
 }
