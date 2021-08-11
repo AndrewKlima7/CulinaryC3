@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+
 namespace CulinaryC3.Models
 {
     public partial class Group

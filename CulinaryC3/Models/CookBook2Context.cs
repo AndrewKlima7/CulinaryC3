@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 
+
 namespace CulinaryC3.Models
 {
     public partial class CookBook2Context : DbContext
@@ -24,11 +25,11 @@ namespace CulinaryC3.Models
         public virtual DbSet<Recipe> Recipes { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
+
                 optionsBuilder.UseSqlServer("Server=tcp:cc98765.database.windows.net,1433;Initial Catalog=CookBook2;Persist Security Info=False;User ID=CulinaryC;Password=ShrimpTears5;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             }
         }
@@ -46,7 +47,6 @@ namespace CulinaryC3.Models
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK__Favorite__UserId__6477ECF3");
             });
-
 
             modelBuilder.Entity<Friend>(entity =>
             {
