@@ -28,6 +28,7 @@ import { LoginComponent } from './login/login.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,6 +79,7 @@ import { LoginComponent } from './login/login.component';
       { path: 'app-pantry', component: PantryComponent },
       { path: 'app-register', component: RegisterComponent },
       { path: 'app-login', component: LoginComponent }
+     
 
     ])
   ],
