@@ -62,17 +62,61 @@ namespace CulinaryC.Controllers
         {
             bool login;
             string npass = Encrypt(password);
-            User u = db.Users.Where(x => x.LoginId.ToLower() == email.ToLower() && x.Password == npass).ToList().First();
+            try
+            {
+                User u = db.Users.Where(x => x.LoginId.ToLower() == email.ToLower() && x.Password == npass).ToList().First();
+                if (u != null)
+                {
+                    return login = true;
+                }
+                return login = false;
+            }
+            catch (System.InvalidOperationException)
+            {
+                return login = false;
+            }
+        }
 
-            if(u != null)
-            {
-                login = true;
-            }
-            else
-            {
-                login = false;
-            }
-            return login;
+        [HttpPut("newEmail={email}&u={userId}")]
+        public void NewEmail(string email, int userId) {
+            User u = db.Users.Find(userId);
+
+            u.LoginId = email;
+
+            db.Users.Update(u);
+            db.SaveChanges();
+        }
+
+        [HttpPut("Winner={userId}")]
+        public void Winner(int userId)
+        {
+            User u = db.Users.Find(userId);
+
+            u.Score = u.Score + 17501;
+
+            db.Users.Update(u);
+            db.SaveChanges();
+        }
+
+        [HttpDelete("removeUser={userId}")]
+        public void RemoveUser(int userId)
+        {
+            User u = db.Users.Find(userId);
+
+            db.Users.Remove(u);
+            db.SaveChanges();
+        }
+
+        [HttpPut("newPass={password}&u={userId}")]
+        public void newPassword(string password, int userId)
+        {
+            string npass = Encrypt(password);
+            User u = db.Users.Find(userId);
+
+            u.Password = npass;
+
+            db.Users.Update(u);
+            db.SaveChanges();
         }
 
         [HttpGet("pw={input}")]

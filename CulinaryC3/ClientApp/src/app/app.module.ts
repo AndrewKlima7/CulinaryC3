@@ -25,6 +25,7 @@ import { DetailGroupComponent } from './detail-group/detail-group.component';
 import { PantryComponent } from './pantry/pantry.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 
 
@@ -50,7 +51,8 @@ import { LoginComponent } from './login/login.component';
     DetailGroupComponent,
     PantryComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    AccountSettingsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -77,7 +79,8 @@ import { LoginComponent } from './login/login.component';
       { path: 'app-upload', component: UploadComponent },
       { path: 'app-pantry', component: PantryComponent },
       { path: 'app-register', component: RegisterComponent },
-      { path: 'app-login', component: LoginComponent }
+      { path: 'app-login', component: LoginComponent },
+      { path: 'app-account-settings', component: AccountSettingsComponent }
 
     ])
   ],
