@@ -1,4 +1,18 @@
-<div><h1>Leaderboard</h1></div>
-<div *ngFor="let user of userList; index as i">
-  <h2>{{user.name}}: {{user.score}}</h2>
+<div class="row">
+  <div class="container main-border">
+
+    <div class="col-lg-8 col-md-8 col-centered col-sm-12">
+      <div>
+        <h2>Leaderboard</h2>
+      </div>
+      <div class="secondary-border" *ngFor="let user of userList; index as i">
+        <div class="center">
+          <div>
+            <img style="height: 200px; width: 200px;" src="{{user.picture}}" />
+            <h2>{{user.name}}: {{user.score}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
