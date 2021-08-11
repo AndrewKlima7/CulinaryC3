@@ -60,4 +60,29 @@ export class UserService {
     let url: string = this.base + `/GetEmail/e=${email}&p=${password}`
     this.http.post<User>(url, {}).subscribe(result => { console.log(result) });
   }
+
+  login(password: string, email: string) {
+    let url: string = this.base + `/pw=${password}&e=${email}/check`;
+    return this.http.post<boolean>(url, {});
+  }
+
+  newPass(password: string, userId: number) {
+    let url: string = this.base + `/newPass=${password}&u=${userId}`;
+    this.http.put(url, {}).subscribe(result => { console.log(result) });
+  }
+
+  newEmail(email: string, userId: number) {
+    let url: string = this.base + `/newEmail=${email}&u=${userId}`;
+    this.http.put(url, {}).subscribe(result => { console.log(result) });
+  }
+
+  deleteUser(userId: number) {
+    let url: string = this.base + `/removeUser=${userId}`;
+    this.http.delete(url).subscribe((result) => console.log(result));
+  }
+
+  Winner(userId: number) {
+    let url: string = this.base + `/Winner=${userId}`;
+    this.http.put(url, {}).subscribe(result => { console.log(result) });
+  }
 }

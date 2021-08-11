@@ -1,0 +1,39 @@
+<div>
+  <h2>Change Password</h2>
+  <form #password="ngForm" (ngSubmit)="changePassword(password)">
+    <p>Current password:</p>
+    <!--maybe set these types to password to keep it hidden to keep it visual for ease?-->
+    <input type="text" name="p1" placeholder="Current Password1" ngModel />
+    <input type="text" name="p2" placeholder="Current Password2" ngModel />
+    <br />
+    <p>New password:</p>
+    <input type="password" name="newPas" placeholder="New Password" ngModel />
+    <input type="submit" value="Update Password" />
+  </form>
+  <div *ngIf="passMessage !== null">
+    <p>{{passMessage}}</p>
+  </div>
+  <br />
+  <h2>Change Email</h2>
+  <form #mail="ngForm" (ngSubmit)="changeEmail(mail)">
+    <input type="text" name="email" placeholder="New Email" ngModel />
+    <input type="submit" value="Update Email" />
+  </form>
+  <div *ngIf="passMessage !== null">
+    <p>{{emailMessage}}</p>
+  </div>
+
+  <h2>Delete Account</h2>
+  <button id="permanent" (click)="delete()">Permanently Delete</button>
+  <br />
+
+  <h3>Guess the number for all the points can guess the correct number</h3>
+  <form #guess="ngForm" (ngSubmit)="Guess(guess)">
+    <input type="number" name="guesses" placeholder="Good Luck" ngModel />
+    <input type="submit" value="Guess" />
+  </form>
+  <div *ngIf="WinnerMessage !== undefined">
+    <p>{{WinnerMessage}} <br /> The number was {{num}}</p>
+  </div>
+</div>
+
