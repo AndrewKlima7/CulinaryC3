@@ -7,6 +7,7 @@ import { Recipe } from 'src/Recipe';
 import { DBIngredient } from 'src/DBIngredient';
 import { NgForm, NgModel } from '@angular/forms';
 import { UserService } from '../../UserService';
+import { UploadService } from '../upload.service';
 
 @Component({
   selector: 'app-add-recipe',
@@ -39,7 +40,6 @@ export class AddRecipeComponent {
   recName: string;
   dbIng: DBIngredient;
   userIngredient: DBIngredient;
-  fileToUpload: File = null;
   response: { dbPath: '' }
   ste4: boolean = false;
   ste5: boolean = false;
@@ -49,8 +49,10 @@ export class AddRecipeComponent {
   ste9: boolean = false;
   ste10: boolean = false;
   des: string = "";
+  imageName: string = "";
+  sas = "sp=rac&st=2021-08-11T17:11:10Z&se=2021-09-09T01:11:10Z&spr=https&sv=2020-08-04&sr=c&sig=sh8RQD%2BL6gUEL7P9iMJaddZ6jRKu%2FxZajWbhts73MGI%3D"
 
-  constructor(private SpoonApi: SpoonacularAPI, private recServ: RecipeService, private userService: UserService) {
+  constructor(private SpoonApi: SpoonacularAPI, private recServ: RecipeService, private userService: UserService, private blobService: UploadService) {
     //will get the userName / Email from the login of identity
     this.userInfo = localStorage.getItem('userEmail');
       //this takes the email and finds the userId connected to it
@@ -177,9 +179,8 @@ export class AddRecipeComponent {
   }
   UpdateRecipe(form: NgForm) {
     let serv: number = form.form.value.servings;
-    let newPath: string = this.response.dbPath.slice(17);
-    console.log(newPath);
-    this.recServ.updateRecipe(this.recName, this.des, serv, newPath)
+
+    this.recServ.updateRecipe(this.recName, this.des, serv, this.imageName)
 
       .subscribe(result => { console.log(result) });
   }
@@ -213,10 +214,11 @@ export class AddRecipeComponent {
     })
   }
 
-  //Method from parent
-  //the event comes from the upload component
-  uploadFinished = (event) => {
-    this.response = event;
+  public imageSelected(file: File) {
+    this.blobService.uploadImage(this.sas, file, file.name, () => {
+      console.log(file.name);
+      this.imageName = file.name;
+    })
   }
 
   step4() {

@@ -124,10 +124,9 @@ namespace CulinaryC.Controllers
         {
             Recipe r = db.Recipes.Where(x => x.RecipeName == name).ToList().Last();
             User u = db.Users.Where(x => x.Id == r.UserId).ToList().First();
-            string newPath = "Resources/Images/" + image; 
             u.Score = u.Score + 20;
             db.Users.Update(u);
-
+            string newPath = "https://recipephotos.blob.core.windows.net/photos/photos/" + image;
             r.Description = desc;
             r.Servings = serv;
             r.Picture = newPath;
