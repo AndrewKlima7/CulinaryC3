@@ -14,6 +14,11 @@
       <img style="height: 200px; width: 200px;" src="{{user.picture}}" />
       <br />
       <h4>Score: {{user.score}}</h4>
+
+      <div *ngIf="numFollowers !== null">
+        <h3>You have {{numFollowers}} followers</h3>
+      </div>
+
       <button type="button" class="btn btn-outline-info button-space" routerLink='/app-pantry'>Profile Settings</button>
       <button type="button" class="btn btn-outline-info button-space" routerLink='/app-account-settings'>Account Settings</button>
     </div>

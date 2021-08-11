@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Friends } from './Friends';
+import { Friends, Friends2 } from './Friends';
 
 @Injectable()
 export class FriendsService {
@@ -32,5 +32,10 @@ export class FriendsService {
   checkFriends(id: number, friendId: number) {
     let url: string = this.base + `/checkfriends=${id}/f=${friendId}`;
     return this.http.get<Friends[]>(url);
+  }
+
+  All() {
+    let url: string = this.base + `/Allfriends`;
+    return this.http.get<Friends2[]>(url);
   }
 }
