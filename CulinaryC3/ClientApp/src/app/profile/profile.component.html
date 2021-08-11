@@ -10,7 +10,7 @@
       <br />
       <h4>Score: {{user.score}}</h4>
       <button type="button" class="btn btn-outline-info button-space" routerLink='/app-pantry'>Profile Settings</button>
-      <button type="button" class="btn btn-outline-info button-space" routerLink='/authentication/profile'>Account Settings</button>
+      <button type="button" class="btn btn-outline-info button-space" routerLink='/'>Account Settings</button>
     </div>
 
     <!--friend information-->
@@ -51,7 +51,7 @@
   <!--display list of recipes-->
   <div class="row">
     <div *ngFor="let r of rList | slice:0:5">
-      <div class="col-lg-4 col-md-6 col-sm-12 center" style="max-width: 8rem; min-width: 20rem;">
+      <div class="col-lg-4 col-md-6 col-sm-12" style="max-width: 8rem; min-width: 20rem;">
         <!--if picture is null -- supply default-->
         <div class="card secondary-border" *ngIf="r.picture === null; else elseBlock">
           <img class="card-img-top" style="border-radius: 20px;" src="Default_Hat.png" />
