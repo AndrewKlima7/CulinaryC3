@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { RecipeofDay } from './RecipeofDay';
 import { User } from './User';
 
 @Injectable()
@@ -64,5 +65,30 @@ export class UserService {
   login(password: string, email: string) {
     let url: string = this.base + `/pw=${password}&e=${email}/check`;
     return this.http.post<boolean>(url, {});
+  }
+
+  newPass(password: string, userId: number) {
+    let url: string = this.base + `/newPass=${password}&u=${userId}`;
+    this.http.put(url, {}).subscribe(result => { console.log(result) });
+  }
+
+  newEmail(email: string, userId: number) {
+    let url: string = this.base + `/newEmail=${email}&u=${userId}`;
+    this.http.put(url, {}).subscribe(result => { console.log(result) });
+  }
+
+  deleteUser(userId: number) {
+    let url: string = this.base + `/removeUser=${userId}`;
+    this.http.delete(url).subscribe((result) => console.log(result));
+  }
+
+  Winner(userId: number) {
+    let url: string = this.base + `/Winner=${userId}`;
+    this.http.put(url, {}).subscribe(result => { console.log(result) });
+  }
+
+  recipeday() {
+    let url: string = this.base + `/recipeofday`;
+    return this.http.get<RecipeofDay>(url);
   }
 }

@@ -158,9 +158,10 @@
 
         <form #directionsForm="ngForm" (ngSubmit)="UpdateRecipe(directionsForm); AddIngredientsToDB(); ConfirmRecipe()" id="dirform" enctype="multipart/form-data">
           Servings: <input type="number" name="servings" ngModel /><br />
-          <!-- child selector- onUploadFinished @output event from child -->
-          <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
-          <!-- uploadFinished() is method from parent -->
+
+          <input type="file" (change)="imageSelected($event.target.files[0])" />
+
+
           <br>
           <input type="submit" value="Add Recipe" />
         </form>

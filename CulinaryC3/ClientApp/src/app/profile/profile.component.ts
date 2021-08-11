@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Friends } from '../../Friends';
+import { Friends, Friends2 } from '../../Friends';
 import { FriendsService } from '../../Friends.service';
 import { Group } from '../../group';
 import { GroupService } from '../../group.service';
@@ -29,8 +29,10 @@ export class ProfileComponent {
   value: number;
   gList: Group[] = [];
   bool: boolean = true;
-  leader: string = "";
-  img: string = "";
+  leader: string | null = null;
+  allF: Friends2[] = [];
+  Allfollowers: Friends2[] = [];
+  numFollowers: number | null = null;
 
   constructor(private userService: UserService,
     private friendService: FriendsService, private recipeService: RecipeService,
@@ -45,28 +47,32 @@ export class ProfileComponent {
         this.user = id;
 
         console.log(this.userId);
-
         userService.leaderboard().subscribe((result2) => {
-          if (result2[0].id == this.userId) {
+          console.log(result2[0].id)
+          if (result2[0].id === this.userId) {
             this.leader = "CCLogo.png"
           }
-
-          this.userService.leaderboard().subscribe((result) => {
-            console.log(result[0]);
-            console.log(this.user);
-            if (result[0].id === this.user.id) {
-              this.img = "CCLogo.png"
-            }
-            console.log(this.img);
+            console.log(this.leader);
             this.displayFriends(this.userId);
             this.displayUserRecipes(this.userId);
             this.getNotifications(this.userId);
             this.userGroups(this.userId);
-          })
         })
-        
       })
 
+    friendService.All().subscribe((result) => {
+      this.allF = result;
+      console.log(this.allF);
+
+      for (var i = 0; i < this.allF.length; i++) {
+        if (this.allF[i].friendId == this.userId) {
+          this.Allfollowers.push(this.allF[i]);
+        }
+      }
+      console.log(this.Allfollowers);
+      this.numFollowers = this.Allfollowers.length;
+      console.log(this.numFollowers);
+    })
     
   }
 
@@ -130,5 +136,6 @@ export class ProfileComponent {
       });
     }
   }
+
 
 }
