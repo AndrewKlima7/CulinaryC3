@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
@@ -26,6 +25,7 @@ import { PantryComponent } from './pantry/pantry.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+
 
 
 
@@ -81,6 +81,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
       { path: 'app-register', component: RegisterComponent },
       { path: 'app-login', component: LoginComponent },
       { path: 'app-account-settings', component: AccountSettingsComponent }
+
 
     ])
   ],
