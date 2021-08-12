@@ -1,44 +1,45 @@
+
 <header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
-    <a class="navbar-brand" href="#"><h2>Culinary Conquest</h2></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" [routerLink]='["/app-pantry"]'>Pantry</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" [routerLink]='["/all-recipes"]'>Recipes</a>
-        </li>
-        <li id="navlink1" class="nav-item">
-          <a class="nav-link text-light" [routerLink]="['/app-profile']">Profile</a>
-        </li>
-        <li id="navlink2" class="nav-item">
-          <a class="nav-link text-light" [routerLink]="['/app-friends']">Friends</a>
-        </li>
-        <li id="navlink3" class="nav-item">
-          <a class="nav-link text-light" [routerLink]="['/app-group']">Groups</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" [routerLink]="['/app-leaderboard']">Leaderboard</a>
-        </li>
-        <li id="begone1" class="nav-item">
-          <a class="nav-link text-light" [routerLink]="['/app-login']">Login</a>
-        </li>
-        <li id="begone2" class="nav-item">
-          <a class="nav-link text-light" [routerLink]="['/app-register']">Register</a>
-        </li>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+      <a class="navbar-brand" href="#"><h2>Culinary Conquest</h2></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <li id="navlink4" class="nav-item">
-            <a class="nav-link text-light" [routerLink]="['/app-login']" (click)="logout()">Logout</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-</header>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class=" nav-item active">
+            <a class="nav-link" id="navbarSupportedContent" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href='#' [routerLink]='["/app-pantry"]'>Pantry</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" [routerLink]='["/all-recipes"]'>Recipes</a>
+          </li>
+          <li id="navlink1" class="nav-item">
+            <a class="nav-link text-light" [routerLink]="['/app-profile']">Profile</a>
+          </li>
+          <li id="navlink2" class="nav-item">
+            <a class="nav-link text-light" [routerLink]="['/app-friends']">Friends</a>
+          </li>
+          <li id="navlink3" class="nav-item">
+            <a class="nav-link text-light" [routerLink]="['/app-group']">Groups</a>
+          </li >
+      <li class="nav-item">
+        <a class="nav-link text-light" [routerLink]="['/app-leaderboard']">Leaderboard</a>
+          </li >
+      <li id="begone1" class="nav-item">
+        <a class="nav-link text-light" [routerLink]="['/app-login']">Login</a>
+          </li >
+      <li id="begone2" class="nav-item">
+        <a class="nav-link text-light" [routerLink]="['/app-register']">Register</a>
+          </li >
 
+      <li id="navlink4" class="nav-item">
+        <a class="nav-link text-light" [routerLink]="['/app-login']" (click)="logout()">Logout</a>
+          </li >
+        </ul >
+      </div >
+    </nav >
+</header >
