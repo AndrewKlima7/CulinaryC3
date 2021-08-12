@@ -85,7 +85,7 @@ export class AccountSettingsComponent {
     }
     else
     {
-      this.WinnerMessage = "LOSER!"
+      this.WinnerMessage = "A developer knows the secret"
     }
   }
 }
