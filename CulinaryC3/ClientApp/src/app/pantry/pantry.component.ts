@@ -52,7 +52,7 @@ export class PantryComponent {
 
   changeName(name: NgForm) {
     this.userService.updateUsers(name.form.value.value, this.userId);
-    document.getElementById("new").innerHTML = `Welcome ${name.form.value.value} to the Chef Pantry!`
+    document.getElementById("new").innerHTML = `Welcome to the Chef Pantry, ${name.form.value.value}!`
   }
 
   changeTitle(title: string) {

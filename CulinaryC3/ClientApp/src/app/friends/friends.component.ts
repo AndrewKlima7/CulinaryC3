@@ -41,10 +41,11 @@ export class FriendsComponent {
     this.friendService.removeFriend(this.userId, friendId);
     this.message = "Friend Removed"
 
-      this.userService.getUserbyLoginId(this.userInfo).subscribe((id) => {
-        this.userId = id.id;
-        console.log(this.userId);
-        this.displayFriends(this.userId);
-      })
+    this.userService.getUserbyLoginId(this.userInfo).subscribe((id) => {
+      this.userId = id.id;
+      console.log(this.userId);
+      this.displayFriends(this.userId);
+    })
+    window.location.reload();
   }
 }

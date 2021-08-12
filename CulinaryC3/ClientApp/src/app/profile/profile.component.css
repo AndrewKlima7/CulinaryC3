@@ -1,5 +1,20 @@
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 .center {
   text-align: center;
+}
+
+.inputFeild {
+  Color: #003638;
+}
+
+input[type=text]:focus {
+  border: 3px solid #53B8BB;
 }
 
 .main-border {
@@ -11,7 +26,7 @@
 }
 
 .secondary-border {
-  border: solid 4px #53B8BB;
+  border: solid 3px #53B8BB;
   border-radius: 20px;
   background-color: #003638;
 }
@@ -25,17 +40,36 @@ a:hover {
   color: white;
 }
 
+.card-size {
+  width: 18rem;
+}
+
 .headding-padding {
   padding-top: 10px;
 }
 
-.card-img-size{
-    height: 281px;
-    width: 280px;
+.button-border {
+  border: solid 3px #53B8BB;
+  border-radius: 10px;
+  background-color: #003638;
+  color: #53B8BB;
 }
 
-.card {
-  margin: 0 auto; /* Added */
-  float: none; /* Added */
-  margin-bottom: 10px; /* Added */
+  .button-border:hover {
+    background-color: white;
+    opacity: 0.5;
+    color: #003638
+  }
+
+.button-border2 {
+  border: solid 1px #78f7fa;
+  border-radius: 10px;
+  background-color: #003638;
+  color: #78f7fa;
 }
+
+  .button-border2:hover {
+    background-color: white;
+    opacity: 0.5;
+    color: #003638
+  }
