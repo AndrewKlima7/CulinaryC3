@@ -37,3 +37,19 @@ html, header, body {
 h1, h2, h3 {
   color: #F3F2C9;
 }
+
+.b3 {
+  margin: 0 auto;
+  background-color: #ff1493;
+  color: #eee;
+  text-align: center;
+  display: inline-block;
+  float: right;
+  justify-content: center;
+  width: min-content;
+  padding: 5px
+}
+
+hr {
+  border-top: 1px solid #53B8BB;
+}
