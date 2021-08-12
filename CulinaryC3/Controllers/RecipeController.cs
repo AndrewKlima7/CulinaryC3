@@ -55,9 +55,8 @@ namespace CulinaryC.Controllers
         [HttpGet("GetRecipesByIngName={ingName}")]
         public List<Recipe> GetRecipesByIngName(string ingName)
         {
-
             List<Recipe> RList = db.Recipes.ToList();
-            List<Ingredient> I = db.Ingredients.Where(x => x.Item.ToLower().Contains(ingName.ToLower())).ToList();
+            List<Ingredient> I = db.Ingredients.Where(x => x.Item.Contains(ingName)).ToList();
             List<Recipe> RFound = new List<Recipe>();
             foreach (Ingredient i in I)
             {
@@ -68,10 +67,8 @@ namespace CulinaryC.Controllers
                         RFound.Add(r);
                     }
                 }
-
             }
             return RFound;
-
         }
 
         [HttpPut("removescore={recipeId}")]
@@ -105,9 +102,15 @@ namespace CulinaryC.Controllers
         [HttpGet("N={name}")]
         public Recipe GetRecipeByName(string name)
         {
-            Recipe rec = new Recipe();
+            Recipe rec = db.Recipes.Where(x => x.RecipeName.ToLower() == name.ToLower()).ToList().Last();
 
-            rec = db.Recipes.Where(x => x.RecipeName.ToLower() == name.ToLower()).ToList().Last();
+            return rec;
+        }
+
+        [HttpGet("search/N={name}")]
+        public List<Recipe> GetAllRecipeByName(string name)
+        {
+            List<Recipe> rec = db.Recipes.Where(x => x.RecipeName.ToLower().Contains(name.ToLower())).ToList();
 
             return rec;
         }

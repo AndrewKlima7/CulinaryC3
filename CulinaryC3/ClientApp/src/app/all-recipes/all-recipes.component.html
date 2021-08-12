@@ -10,9 +10,16 @@
         <br />
         <hr />
         <div *ngIf="r !== undefined">
-          <h3>{{r.recipeName}}</h3>
-          <a class="btn btn-outline-info button-space" [routerLink]="['/detail-recipe', r.id]"> More Details </a>
+          <div *ngFor="let rs of r">
+            <h3>{{rs.recipeName}}</h3>
+            <a class="btn btn-outline-info button-space" [routerLink]="['/detail-recipe', rs.id]"> More Details </a>
+          </div>
         </div>
+
+        <div *ngIf="message2 != undefined">
+          <p>{{message2}}</p>
+        </div>
+
         <br /><hr />
         <!--Search by ingredients-->
         <h4>Search Recipe By Ingredient </h4>
@@ -24,6 +31,11 @@
           <h3>{{recipe.recipeName}}</h3>
           <a class="btn btn-outline-info button-space" [routerLink]="['/detail-recipe', recipe.id]"> More Details </a>
         </div>
+
+        <div *ngIf="message3 != undefined">
+          <p>{{message3}}</p>
+        </div>
+
         <br />
       </div>
     </div>
