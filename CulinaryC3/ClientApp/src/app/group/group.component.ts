@@ -23,10 +23,14 @@ export class GroupComponent {
   message: string | null = null;
   gList: User[] = [];
   message2: string | null = null;
+  groups: Group[] = [];
 
   //------------ ADD USER service to group ---------------
   constructor(private groupService: GroupService, private userService: UserService,
     private friendsService: FriendsService, private invitesService: InvitesService) {
+
+    this.groups = null;
+    this.groups = [];
     //this.displayGroups();
 
     //will get the userName / Email from the login of identity
@@ -81,14 +85,31 @@ export class GroupComponent {
   }
 
   inviteFriend(friendId: number, groupName: string) {
-    this.invitesService.sendInvite(friendId, this.userInfo, groupName);
-    this.message = "Friend Invited!";
-    return this.message;
+    this.groupService.getGroups().subscribe((result) => {
+      for (var i = 0; i < result.length; i++) {
+        if (result[i].groupName === groupName && result[i].userId === friendId) {
+          this.groups.push(result[i]);
+        }
+      }
+      console.log(this.groups)
+      if (this.groups.length == 0) {
+        this.invitesService.sendInvite(friendId, this.userInfo, groupName);
+        this.message = "Friend Invited!";
+        return this.message;
+      }
+      else
+      {
+        this.message = "Friend already group member!";
+        return this.message;
+      }
+    })
+    
   }
 
   removeUser(id: number, groupName: string) {
     console.log(id);
     console.log(groupName);
+    
     this.groupService.removeUser(groupName, id);
     this.message = "User Removed";
     this.groupUsers(groupName);
