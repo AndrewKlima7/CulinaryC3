@@ -9,6 +9,7 @@ import { UserService } from '../../UserService';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  //styleUrls: ['./home.component.css'],
   providers: [UserService, RecipeService]
 })
 export class HomeComponent {
@@ -23,7 +24,7 @@ export class HomeComponent {
     let day = new Date();
     this.recipeDay = JSON.parse(localStorage.getItem('recipeDay'));
     console.log(this.recipeDay);
-    if (this.recipeDay.dayofMonth === null || this.recipeDay.dayofMonth === day.getDate()) {
+    if (this.recipeDay === null || this.recipeDay.dayofMonth === null || this.recipeDay.dayofMonth === day.getDate()) {
       this.userService.recipeday().subscribe((r) => {
         this.recipeDay = r
         console.log(this.recipeDay);
@@ -38,11 +39,8 @@ export class HomeComponent {
     }
     this.getRecipe();
   }
-
   ngOnInit() {
-
   }
-
   getRecipe() {
     this.recipeService.getRecipeById(this.recipeDay.recipeId).subscribe((result) => {
       this.recipe = result;
@@ -50,3 +48,4 @@ export class HomeComponent {
     })
   }
 }
+

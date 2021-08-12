@@ -61,6 +61,8 @@ export class AddRecipeComponent {
         console.log(this.userId);
       })
 
+    console.log(this.iList);
+
   }
   //Searches API and returns the ID number of ingredient
   SearchIngredient(food: string) {
