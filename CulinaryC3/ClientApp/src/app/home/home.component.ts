@@ -9,6 +9,7 @@ import { UserService } from '../../UserService';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  //styleUrls: ['./home.component.css'],
   providers: [UserService, RecipeService]
 })
 export class HomeComponent {
@@ -16,14 +17,18 @@ export class HomeComponent {
   public userName: Observable<string>;
   recipeString: string;
   recipeDay: RecipeofDay;
-  recipe: Recipe;
+  recipe: Recipe[];
+  num: number;
+  realRecipe: Recipe;
+
 
 
   constructor(private userService: UserService, private recipeService: RecipeService) {
+    this.recipe = null;
     let day = new Date();
     this.recipeDay = JSON.parse(localStorage.getItem('recipeDay'));
     console.log(this.recipeDay);
-    if (this.recipeDay.dayofMonth === null || this.recipeDay.dayofMonth === day.getDate()) {
+    if (this.recipeDay === null || this.recipeDay.dayofMonth === null || this.recipeDay.dayofMonth === day.getDate()) {
       this.userService.recipeday().subscribe((r) => {
         this.recipeDay = r
         console.log(this.recipeDay);
@@ -38,15 +43,44 @@ export class HomeComponent {
     }
     this.getRecipe();
   }
-
   ngOnInit() {
-
   }
-
   getRecipe() {
-    this.recipeService.getRecipeById(this.recipeDay.recipeId).subscribe((result) => {
-      this.recipe = result;
-      console.log(this.recipe);
+    this.recipe = [];
+    this.recipeService.getRecipes().subscribe((result2) => {
+      try
+      {
+        this.num = this.recipeDay.recipeId
+        console.log(this.num);
+      }
+      catch (exception)
+      {
+        this.num = 0;
+        console.log(this.num);
+      }
+      for (var i = 0; i < result2.length; i++) {
+        console.log(result2[i]);
+        if (result2[i].id === this.num)
+        {
+          this.recipe.push(result2[i]);
+        } 
+      }
+
+      console.log(this.recipe)
+      if (this.recipe.length == null || this.recipe.length == 0)
+      {
+        this.userService.recipeday().subscribe((r) => {
+          this.recipeDay = r
+          console.log(this.recipeDay);
+          localStorage.setItem('recipeDay', JSON.stringify(r));
+          this.getRecipe();
+        });
+      }
+      else
+      {
+        this.realRecipe = this.recipe[0];
+      }
     })
   }
 }
+

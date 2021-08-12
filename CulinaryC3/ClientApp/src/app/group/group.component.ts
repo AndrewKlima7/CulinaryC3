@@ -104,12 +104,16 @@ export class GroupComponent {
           if (g.admin === false) {
             this.groupService.removeUser(g.groupName, g.userId);
           }
-          else
-          {
+          else {
             this.groupService.removeGroup(name);
           }
         }
       }
+      this.userService.getUserbyLoginId(this.userInfo).subscribe((id) => {
+        this.userId = id.id;
+        console.log(this.userId);
+        this.displayGroups(this.userId);
+      })
       window.location.reload();
     })
   }

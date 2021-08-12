@@ -21,7 +21,7 @@ namespace CulinaryC.Controllers
             List<Recipe> r = db.Recipes.ToList();
 
             Random ran = new Random();
-            int num = ran.Next(0, r.Count + 1);
+            int num = ran.Next(0, r.Count);
 
 
             RecipeofDay d = new RecipeofDay();
@@ -120,9 +120,41 @@ namespace CulinaryC.Controllers
         [HttpDelete("removeUser={userId}")]
         public void RemoveUser(int userId)
         {
-            User u = db.Users.Find(userId);
+            List<Recipe> recipes = db.Recipes.Where(x => x.UserId == userId).ToList();
+            foreach (Recipe r in recipes)
+            {
+                List<Ingredient> ing = db.Ingredients.Where(x => x.RecipeId == r.Id).ToList();
+                foreach(Ingredient i in ing)
+                {
+                    db.Ingredients.Remove(i);
+                }
+            }
+            foreach(Recipe r2 in recipes)
+            {
+                db.Recipes.Remove(r2);
+            }
 
+            List<Friend> freinds = db.Friends.Where(x => x.UserId == userId).ToList();
+            foreach(Friend f in freinds)
+            {
+                db.Friends.Remove(f);
+            }
+
+            List<Group> groups = db.Groups.Where(x => x.UserId == userId).ToList();
+            foreach (Group g in groups)
+            {
+                db.Groups.Remove(g);
+            }
+
+            List<Favorite> favs = db.Favorites.Where(x => x.UserId == userId).ToList();
+            foreach (Favorite fav in favs)
+            {
+                db.Favorites.Remove(fav);
+            }
+
+            User u = db.Users.Find(userId);
             db.Users.Remove(u);
+
             db.SaveChanges();
         }
 
@@ -378,7 +410,7 @@ namespace CulinaryC.Controllers
         }
 
         //delete user from group
-        [HttpDelete("removeuser={id}&n={groupName}")]
+        [HttpDelete("deleteuser={id}&n={groupName}")]
         public void RemoveUserFromGroup(int id, string groupName)
         {
             Group groups = db.Groups.Where(x => x.GroupName == groupName && x.UserId == id).ToList().First();
