@@ -79,6 +79,7 @@ export class HomeComponent {
       else
       {
         this.realRecipe = this.recipe[0];
+        console.log(this.realRecipe);
       }
     })
   }

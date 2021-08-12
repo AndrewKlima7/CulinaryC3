@@ -15,11 +15,10 @@
           <div *ngIf="recipe != null">
             <h2>Recipe of the Day</h2>
             <h4>{{realRecipe.recipeName}}</h4>
-
             <img class="card-img-top secondary-border" src="{{realRecipe.picture}}" />
             <p>Score: {{realRecipe.score}}</p>
-            <p>servings: {{realRecipe.servings}}</p>
-            <a class="btn btn-outline-info button-space" [routerLink]="['/detail-recipe', r.id]"> More Details </a>
+            <p>Servings: {{realRecipe.servings}}</p>
+            <a class="btn btn-outline-info button-space" [routerLink]="['/detail-recipe', realRecipe.id]"> More Details </a>
           </div>
         </div>
       </div>
