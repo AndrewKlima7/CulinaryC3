@@ -38,13 +38,6 @@
   margin: 10px;
 }
 
-/*.row{
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
-}*/
 
 .row{
   display: flex;
@@ -65,3 +58,16 @@
     margin:2px;
 }
 
+.input-size-ingredient{
+    width:50px;
+    height: 25px;
+}
+
+.big-button{
+    width:300px;
+    height: 75px;
+}
+
+.ingredient-list{
+    width: 160%, auto;
+}

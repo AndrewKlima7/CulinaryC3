@@ -37,6 +37,9 @@ namespace CulinaryC3
                 o.MemoryBufferThreshold = int.MaxValue;
             });
 
+            services.AddControllers().AddNewtonsoftJson(options =>
+           options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
 
 
 
