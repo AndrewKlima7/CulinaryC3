@@ -5,8 +5,8 @@
   <h1>Create New Recipe</h1><hr />
 
   <div class="row">
-    <div class="col"></div>
-    <div class="col-8 secondary-border center">
+    <div class="col-sm-auto"></div>
+    <div class="col-8 mx-auto secondary-border center">
       <div id="confirm">
         <form #addTitle="ngForm" (ngSubmit)="AddRecipe(addTitle.form.value.title); ConfirmTitle(addTitle.form.value.title)">
           <h2>Title </h2><hr />
@@ -16,11 +16,11 @@
         </form>
       </div>
     </div>
-    <div class="col"></div>
+    <div class="col-sm-auto"></div>
   </div>
   <div class="row ">
-    <div class="col-sm-auto"></div>
-    <div class="col-lg-auto">
+    <div class="col-auto"></div>
+    <div class="col-8 mx-auto">
       <div *ngIf="iList.length !== 0; else elseBlock">
         <div class="secondary-border center ingredient-list">
           <h3>Ingredient List</h3>
@@ -34,7 +34,7 @@
         </div>
       </ng-template>
     </div>
-    <div class="col-sm-auto"></div>
+    <div class="col-auto"></div>
   </div>
 
 
