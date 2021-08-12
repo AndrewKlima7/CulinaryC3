@@ -9,6 +9,7 @@ import { UserService } from '../../UserService';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  //styleUrls: ['./home.component.css'],
   providers: [UserService, RecipeService]
 })
 export class HomeComponent {
