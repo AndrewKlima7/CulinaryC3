@@ -73,7 +73,7 @@
               <a class="btn btn-outline-info button-space" [routerLink]="['/detail-recipe', r.id]">View Recipe</a>
               <br />
               <button type="button" class="btn btn-outline-danger btn-sm button-space" id="{{r.id}}" (click)="warning(r.id)">Remove Recipe</button>
-           </div>
+            </div>
           </div>
           <!--will display recip with photo user supplies-->
           <ng-template #elseBlock>
@@ -86,7 +86,7 @@
                 <br />
                 <button type="button" class="btn btn-outline-danger btn-sm button-space" id="{{r.id}}" (click)="warning(r.id)">Remove Recipe</button>
               </div>
-           </div>
+            </div>
           </ng-template>
         </div>
       </div>

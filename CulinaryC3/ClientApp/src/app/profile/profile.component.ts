@@ -64,15 +64,16 @@ export class ProfileComponent {
       this.allF = result;
       console.log(this.allF);
 
-      for (var i = 0; i < this.allF.length; i++) {
-        if (this.allF[i].friendId == this.userId) {
-          this.Allfollowers.push(this.allF[i]);
+      for (var i = 0; i < result.length; i++) {
+        if (result[i].friendId == this.userId) {
+          this.Allfollowers.push(result[i]);
         }
       }
       console.log(this.Allfollowers);
       this.numFollowers = this.Allfollowers.length;
       console.log(this.numFollowers);
     })
+
     
   }
 

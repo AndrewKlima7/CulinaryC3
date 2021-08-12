@@ -25,6 +25,7 @@ export class NavMenuComponent implements OnInit{
       document.getElementById('navlink2').innerHTML = "";
       document.getElementById('navlink3').innerHTML = "";
       document.getElementById('navlink4').innerHTML = "";
+      document.getElementById('navlink5').innerHTML = "";
 
     }
     else
