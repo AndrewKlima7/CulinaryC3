@@ -125,7 +125,7 @@ export class AllRecipesComponent {
   //Search function by Name
   //NEED TO CHANGE THE BACK END TO CONTAINS
   searchRecipeByName(name: string) {
-    this.recServ.getRecipeByName(name).subscribe((Recipe) => {
+    this.recServ.searchRecipeByName(name).subscribe((Recipe) => {
       console.log(this.r);
       if (Recipe.length === 0) {
         this.message2 = "No recipes";
