@@ -66,7 +66,7 @@ export class RecipeService {
 
   getRecipeByName(name: string){
     let url: string = this.base + `/N=${name}`;
-    return this.http.get<Recipe>(url);
+    return this.http.get<Recipe[]>(url);
   }
 
   updateRecipe(name: string, desc: string, serv: number, image: string ) {
