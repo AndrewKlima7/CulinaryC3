@@ -5,7 +5,7 @@
   <h1>Create New Recipe</h1><hr />
 
   <div class="row">
-    <div class="col"><p></p></div>
+    <div class="col-sm-auto"></div>
     <div class="col-8 mx-auto secondary-border center">
       <div id="confirm">
         <form #addTitle="ngForm" (ngSubmit)="AddRecipe(addTitle.form.value.title); ConfirmTitle(addTitle.form.value.title)">
@@ -16,10 +16,10 @@
         </form>
       </div>
     </div>
-    <div class="col"><p></p></div>
+    <div class="col-sm-auto"></div>
   </div>
   <div class="row ">
-    <div class="col-sm-auto"></div>
+    <div class="col-auto"></div>
     <div class="col-8 mx-auto">
       <div *ngIf="iList.length !== 0; else elseBlock">
         <div class="secondary-border center ingredient-list">
@@ -34,7 +34,7 @@
         </div>
       </ng-template>
     </div>
-    <div class="col-sm-auto"></div>
+    <div class="col-auto"></div>
   </div>
 
 
@@ -127,6 +127,7 @@
     </div>
   </div>
 
+
   <!--Add Directions-->
   <!--Add Image-->
   <!-- Update form and pass completed recipe to backend -->
@@ -202,7 +203,7 @@
         <hr />
         <!--add photo-->
         <h3>Add A Photo</h3>
-        <input class="btn btn-outline-info photo-button button-space" type="file" (change)="imageSelected($event.target.files[0])" />
+        <input class="btn btn-outline-info btn-sm button-space" type="file" (change)="imageSelected($event.target.files[0])" />
         <br>
         <input class="btn btn-outline-success button-space big-button" type="submit" value="Add Recipe" />
       </form>
