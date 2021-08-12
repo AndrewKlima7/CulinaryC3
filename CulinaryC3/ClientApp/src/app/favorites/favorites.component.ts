@@ -37,10 +37,6 @@ export class FavoritesComponent {
   removeFavorite(recipeId: number) {
     this.favoriteService.removeFavorite(this.userId, recipeId);
     this.message = "Favorite Removed"
-      this.userService.getUserbyLoginId(this.userInfo).subscribe((id) => {
-        this.userId = id.id;
-        console.log(this.userId);
-        this.displayFavorites(this.userId);
-      })
+    window.location.reload();
   }
 }
