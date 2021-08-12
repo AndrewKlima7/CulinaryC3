@@ -59,16 +59,21 @@ export class AllRecipesComponent {
           for (var i = 0; i < result2.length; i++) {
             favoriteService.checkFavs(this.userId, result2[i].id).subscribe((f) => {
               this.recipe.push(f[i]);
+
+              for (let i = 0; i < this.recipe.length; i++) {
+                console.log(f[i].recipeId);
+                document.getElementById(f[i].recipeId.toString()).innerHTML
+                  = "<img id='i' class='favButton' src = 'star.png' />";
+              }
             })
           }
-
-          for (var i = 0; i < this.recipe.length; i++) {
-            document.getElementById(this.recipe[i].recipeId.toString()).innerHTML
-              = "<img id='i' class='favButton' src = 'star.png' />";
-          }
+          console.log(this.recipe)
+          
         })
       })
   }
+
+  
 
   favorite(recipeId: number) {
 
