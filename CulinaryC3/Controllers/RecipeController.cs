@@ -56,7 +56,7 @@ namespace CulinaryC.Controllers
         public List<Recipe> GetRecipesByIngName(string ingName)
         {
             List<Recipe> RList = db.Recipes.ToList();
-            List<Ingredient> I = db.Ingredients.Where(x => x.Item.ToLower().Contains(ingName.ToLower())).ToList();
+            List<Ingredient> I = db.Ingredients.Where(x => x.Item.Contains(ingName)).ToList();
             List<Recipe> RFound = new List<Recipe>();
             foreach (Ingredient i in I)
             {
