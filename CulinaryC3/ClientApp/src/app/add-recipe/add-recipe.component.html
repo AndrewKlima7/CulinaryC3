@@ -60,7 +60,7 @@
         <form #addIngredientForm="ngForm" (ngSubmit)="AddToIngArray(addIngredientForm)">
           <input type="hidden" name="food" value="{{ing.name}}" placeholder="{{ing.name}}" ngModel />
           <input type="hidden" name="recipeID" value="{{ing.id}}" ngModel />
-          <input class="button-space" style="width: 50px" type="number" min="0" placeholder="1" name="amount" ngModel />
+          <input class="button-space" style="width: 25%" type="number" min="0" placeholder="1" name="amount" ngModel />
           <select name="unit" ngModel>
             <option disabled selected>unit</option>
             <option value="g">g</option>
