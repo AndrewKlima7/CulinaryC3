@@ -18,7 +18,7 @@ export class AddFriendComponent {
   uList: User[] = null;
   reveal1: string | null = null;
   reveal2: string | null = null;
-  message: string = "";
+  message: string;
   fList: Friends[] = null;
   newList: Friends[] = null;
   value: number;
@@ -30,6 +30,7 @@ export class AddFriendComponent {
         this.userId = id.id;
         console.log(this.userId);
       })
+    console.log(this.message);
 
   }
 
