@@ -55,7 +55,7 @@ export class GroupService {
   }
 
   removeUser(name: string, userId: number) {
-    let url: string = this.base + `/removeuser=${userId}&n=${name}`;
+    let url: string = this.base + `/deleteuser=${userId}&n=${name}`;
     return this.http.delete<Group>(url).subscribe(result => { console.log(result) });
   }
 
