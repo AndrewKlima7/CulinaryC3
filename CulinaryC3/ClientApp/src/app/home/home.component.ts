@@ -9,6 +9,7 @@ import { UserService } from '../../UserService';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  //styleUrls: ['./home.component.css'],
   providers: [UserService, RecipeService]
 })
 export class HomeComponent {
@@ -42,11 +43,8 @@ export class HomeComponent {
     }
     this.getRecipe();
   }
-
   ngOnInit() {
-
   }
-
   getRecipe() {
     this.recipe = [];
     this.recipeService.getRecipes().subscribe((result2) => {
@@ -85,3 +83,4 @@ export class HomeComponent {
     })
   }
 }
+

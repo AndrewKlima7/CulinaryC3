@@ -114,6 +114,7 @@ export class GroupComponent {
         console.log(this.userId);
         this.displayGroups(this.userId);
       })
+      window.location.reload();
     })
   }
 
@@ -127,23 +128,7 @@ export class GroupComponent {
     this.groupService.removeGroup(name);
     this.message = "Group Removed!"
 
-    //for some reason this only updates the list if I call all of this again
-    //wont work if I just call 'this.displayGroups(this.userId);' or if I call
-    // this.userService.getUserbyLoginId(this.userInfo).subscribe((id) => {
-    //this.userId = id.id;
-   // console.log(this.userId);
-   // this.displayGroups(this.userId);
-  //})
-
-      this.userService.getUserbyLoginId(this.userInfo).subscribe((id) => {
-        this.userId = id.id;
-        console.log(this.userId);
-        this.displayGroups(this.userId);
-      })
+    window.location.reload();
 
   }
-
-
-  //this._router.navigate(['SecondComponent', {p1: this.property1, p2: property2 }]);
-
 }

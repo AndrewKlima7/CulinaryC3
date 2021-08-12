@@ -41,10 +41,6 @@ export class DetailRecipeComponent {
     })
     this.id = + this.route.snapshot.paramMap.get('id');
     this.GetRecipeById(this.id);
-    this.recServ.getIngredients().subscribe((DBIngredient) => {
-      this.dbIngList = DBIngredient;
-      this.GetNutritional();
-    })
   }
 
   ngOnInit(): void {
@@ -92,6 +88,10 @@ export class DetailRecipeComponent {
         }
       }
     });
+    this.recServ.getIngredients().subscribe((DBIngredient) => {
+      this.dbIngList = DBIngredient;
+      this.GetNutritional();
+    })
   }
 
   GetUsers() {

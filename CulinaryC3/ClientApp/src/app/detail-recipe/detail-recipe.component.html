@@ -1,46 +1,48 @@
 <!--The id will be passed in, this is just for testing purposes-->
 
-<h4>Recipe Details:</h4>
-<h6>*Nutritional information for submitted ingredients may not be accurate*</h6>
+<div class="container main-border">
 
-<h2>{{r.recipeName}} </h2>
-<div> <b>Servings: </b>{{r.servings}} <br />
-  <b>Recipe Score: </b>{{r.score}}
-</div>
-<div *ngFor="let user of u">
-  <div *ngIf="user.id === r.userId">
-    <b>Created By: </b> {{user.name}} <br /> 
+  <div *ngIf="message == null">
+    <button style="float: right;" type="button" class="btn btn-outline-info button-space" (click)="completed(r.id)">I Made This!</button>
   </div>
-</div>
-<div *ngIf="message !== null">
-  <h3>{{message}}</h3>
-</div>
-<div><b>Ingredients </b></div>
-<div *ngFor="let ing of dbIngList">
-  <div *ngIf="r.id === ing.recipeId">
-    • {{ing.amount}} {{ing.unit}} {{ing.item}}
+    <div style="float: right;" *ngIf="message !== null">
+      <h3>{{message}}</h3>
+    </div>
+  <div>
+    <h2>{{r.recipeName}} </h2>
+    <h6>*Nutritional information is only an estimate and may not be accurate*</h6>
+  </div><br />
+  <h2>Servings</h2>
+  <h4>{{r.servings}}</h4>
+  <div>
+    <img class="secondary-border" style="width: 65%; height:inherit;float: right; margin: 20px 50px 15px 50px;" src="{{r.picture}}" />
+  </div>
+  <h2>Recipe Score</h2>
+  <h4>{{r.score}}</h4>
+  <div *ngFor="let user of u">
+    <div *ngIf="user.id === r.userId">
+      <h3>Created By: {{user.name}}</h3>
+    </div>
+  </div>
+
+  <h2>Ingredients </h2>
+  <div *ngFor="let ing of dbIngList">
+    <h5 *ngIf="r.id === ing.recipeId">
+      - {{ing.amount}} {{ing.unit}} {{ing.item}}
+    </h5>
+  </div>
+  <div>
     <br />
+    <h2>Steps</h2>
+    <div *ngFor="let d of fullDes; index as i">
+      <h5>{{i+1}}: {{d}}</h5>
+    </div>
+  </div>
+  <div>
+    <h2>Nutrition Per Serving </h2>
+    <h4> Calories: {{calories | number:'1.1-1' }}</h4>
+    <h4> Carbs: {{carbs | number:'1.1-1'}}</h4>
+    <h4> Protein: {{protein  | number:'1.1-1'}}</h4>
+    <h4> Fats: {{fats  | number:'1.1-1' }}</h4>
   </div>
 </div>
-<div>
-  <b>Steps: </b>
-  <br />
-</div>
-<div *ngFor="let d of fullDes; index as i">
-  <p>Step {{i+1}}: {{d}}</p>
-</div>
-<div>
-  <h2>Nutrition per serving </h2>
-  <b> Calories:</b> {{calories | number:'1.1-1' }}<br />
-  <b> Carbs:</b> {{carbs | number:'1.1-1'}}<br />
-  <b> Protein:</b> {{protein  | number:'1.1-1'}}<br />
-  <b> Fats:</b> {{fats  | number:'1.1-1' }}<br />
-</div>
-<br />
-
-<div *ngIf="message == null">
-  <button (click)="completed(r.id)">Completed?</button>
-</div>
-
-<img style="width: 400px; height:inherit" src="{{r.picture}}"/>
-
