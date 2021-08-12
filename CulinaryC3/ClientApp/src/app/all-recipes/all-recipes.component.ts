@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { SpoonacularAPI } from '../../SpoonacularAPIService';
 import { WholeFood } from '../../WholeFood';
 import { Ingredient } from '../../Ingredient';
-import { RecipeService } from 'src/RecipeService';
-import { Recipe } from 'src/Recipe';
-import { DBIngredient } from 'src/DBIngredient';
+import { RecipeService } from '../../RecipeService';
+import { Recipe } from '../../Recipe';
+import { DBIngredient } from '../../DBIngredient';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../../UserService';
 import { FavoritesService } from '../../favorites.service';
@@ -23,7 +23,7 @@ import { ActivatedRoute } from '@angular/router';
 export class AllRecipesComponent {
   //Load in all the Recipes
   recipes: Recipe[];
-  r: Recipe
+  r: Recipe[] = [];
   foundRecipe: Recipe[];
   ingList: DBIngredient[];
   userId: number;
@@ -33,6 +33,8 @@ export class AllRecipesComponent {
   recipe: Favorites[] = [];
   ing: string;
   name: string;
+  message2: string = "";
+  message3: string = "";
   
 
 
@@ -124,17 +126,37 @@ export class AllRecipesComponent {
   //NEED TO CHANGE THE BACK END TO CONTAINS
   searchRecipeByName(name: string) {
     this.recServ.getRecipeByName(name).subscribe((Recipe) => {
-      this.r = Recipe;
-      return this.r
+      console.log(this.r);
+      if (Recipe.length === 0) {
+        this.message2 = "No recipes";
+        console.log(this.r);
+        this.r = null;
+        this.r = [];
+      }
+      else
+      {
+        this.r = Recipe;
+        console.log(this.r);
+        this.message2 = "";
+      }
+      
     })
   }
 
   //and ingredient
   searchRecipeByIng(ing: string) {
     this.recServ.getRecipesByIngName(ing).subscribe((Recipe) => {
-      this.foundRecipe = Recipe;
-      console.log(this.foundRecipe);
-      return this.foundRecipe;
+      if (Recipe.length === 0) {
+        this.message3 = "No recipes";
+        console.log(this.foundRecipe);
+        this.foundRecipe = null;
+      }
+      else
+      {
+        this.foundRecipe = Recipe;
+        console.log(this.foundRecipe);
+        this.message3 = "";
+      }
     })
   }
 

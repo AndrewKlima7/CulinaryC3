@@ -3,7 +3,7 @@
     <div class="col center">
       <div *ngIf="user !== undefined; else elseBlock">
         <h2 id="new">Welcome to the Chef Pantry, {{user.name}}!</h2><hr/>
-        <form #changename="ngForm" (ngSubmit)="changeName(changename)">
+        <form id="new2" #changename="ngForm" (ngSubmit)="changeName(changename)">
           <input type="text" name="value" placeholder="{{user.name}}" ngModel /><br />
           <button class="btn btn-outline-info button-space" type="submit" value="Submit">Change Name</button>
         </form>
