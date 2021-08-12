@@ -88,7 +88,7 @@ export class DetailGroupComponent {
     this.recipeServices.displayUserRecipes(g.userId).subscribe((result) => {
       this.recipes = result;
       console.log(this.recipes);
-      for (this.i = 0; this.i <= this.recipes.length; this.i++) {
+      for (this.i = 0; this.i <= this.recipes.length-1; this.i++) {
         this.allRecipes.push(this.recipes[this.i])
         console.log(this.allRecipes);
         if (this.i === this.recipes.length - 1) {
