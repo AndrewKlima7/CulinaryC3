@@ -51,15 +51,16 @@ export class AddRecipeComponent {
   des: string = "";
   imageName: string = "";
   sas = "sp=rac&st=2021-08-11T17:11:10Z&se=2021-09-09T01:11:10Z&spr=https&sv=2020-08-04&sr=c&sig=sh8RQD%2BL6gUEL7P9iMJaddZ6jRKu%2FxZajWbhts73MGI%3D"
+  message: string;
 
   constructor(private SpoonApi: SpoonacularAPI, private recServ: RecipeService, private userService: UserService, private blobService: UploadService) {
     //will get the userName / Email from the login of identity
     this.userInfo = localStorage.getItem('userEmail');
-      //this takes the email and finds the userId connected to it
-      userService.getUserbyLoginId(this.userInfo).subscribe((id) => {
-        this.userId = id.id;
-        console.log(this.userId);
-      })
+    //this takes the email and finds the userId connected to it
+    userService.getUserbyLoginId(this.userInfo).subscribe((id) => {
+      this.userId = id.id;
+      console.log(this.userId);
+    })
 
     console.log(this.iList);
 
@@ -68,18 +69,23 @@ export class AddRecipeComponent {
   SearchIngredient(food: string) {
     console.log(food);
     this.SpoonApi.SearchForWholeFoods(food).subscribe((WholeFood) => {
-      this.wf = WholeFood; console.log(this.wf);
-      this.foodId = this.wf.results[0].id;
-      console.log(this.foodId)
-      this.GetIngredient(this.foodId);
+        this.wf = WholeFood;
+      if (this.wf.results.length == 0 || WholeFood == null || WholeFood == undefined) {
+        this.message = 'That ingredient could not be found, please try again.'
+      }
+      else {
+        this.message = 'Ingredient found!'
+        this.foodId = this.wf.results[0].id;
+        this.GetIngredient(this.foodId);
+      }
     });
   }
   //Pulls ingredient from list using ID from above, to access all details
   GetIngredient(id: number): any {
-      this.SpoonApi.GetFoodFromId(id).subscribe((Ingredient) => {
-        this.ing = Ingredient; console.log(this.ing); console.log(this.ing.name);
-        return this.ing;
-      });
+    this.SpoonApi.GetFoodFromId(id).subscribe((Ingredient) => {
+      this.ing = Ingredient; console.log(this.ing); console.log(this.ing.name);
+      return this.ing;
+    });
   }
   //Adds new recipe, only entering the title, to later be modified.
   AddRecipe(title: string) {
@@ -252,7 +258,7 @@ export class AddRecipeComponent {
   }
 
   AddString(form: NgForm) {
-     this.des = form.form.value.step1 + "*" + form.form.value.step2 + "*" + form.form.value.step3 + "*" + form.form.value.step4 + "*" +
+    this.des = form.form.value.step1 + "*" + form.form.value.step2 + "*" + form.form.value.step3 + "*" + form.form.value.step4 + "*" +
       form.form.value.step5 + "*" + form.form.value.step6 + "*" + form.form.value.step7 + "*" + form.form.value.step8 + "*" + form.form.value.step9 + "*" +
       form.form.value.step10;
   }
