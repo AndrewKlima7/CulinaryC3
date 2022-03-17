@@ -52,7 +52,8 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
     PantryComponent,
     RegisterComponent,
     LoginComponent,
-    AccountSettingsComponent
+    AccountSettingsComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -80,7 +81,8 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
       { path: 'app-pantry', component: PantryComponent },
       { path: 'app-register', component: RegisterComponent },
       { path: 'app-login', component: LoginComponent },
-      { path: 'app-account-settings', component: AccountSettingsComponent }
+      { path: 'app-account-settings', component: AccountSettingsComponent },
+      {path: 'app-upload', component: UploadComponent}
 
 
     ])

@@ -1,3 +1,4 @@
+
 using CulinaryC3.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,7 +17,7 @@ namespace CulinaryC3
 {
     public class Startup
     {
-        string connection = "Server=tcp:cc98765.database.windows.net,1433;Initial Catalog = CookBook2; Persist Security Info=False;User ID = CulinaryC; Password=ShrimpTears5;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30;";
+        string connection = "Server =.\\SQLExpress;Database=CookBook2;Trusted_Connection=True;ConnectRetryCount=0;";
 
         public Startup(IConfiguration configuration)
         {
@@ -68,6 +69,11 @@ namespace CulinaryC3
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+                RequestPath = new PathString("/Resources")
+            });
 
 
             if (!env.IsDevelopment())

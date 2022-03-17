@@ -136,7 +136,7 @@
     <div class="col-8 mx-auto center secondary-border">
       <h2>Directions</h2>
 
-      <form class="form-horizontal" #desForm="ngForm" (ngSubmit)="AddString(desForm)">
+      <form id="dir" class="form-horizontal" #desForm="ngForm" (ngSubmit)="AddString(desForm); ConfirmDir()">
         <input class="input-size-directions" type="text" name="step1" placeholder="Step 1" ngModel />
         <br />
         <input class="input-size-directions" type="text" name="step2" placeholder="Step 2" ngModel />
@@ -202,9 +202,12 @@
         Servings: <input type="number" placeholder="1" name="servings" min="1" ngModel style="width:50px;" /><br />
         <hr />
         <!--add photo-->
-        <h3>Add A Photo</h3>
+        <!-- <h3>Add A Photo</h3>
         <input class="btn btn-outline-info btn-sm button-space" type="file" (change)="imageSelected($event.target.files[0])" />
-        <br>
+        <br> -->
+                  <!-- child selector- onUploadFinished @output event from child -->
+                  <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
+                  <!-- uploadFinished() is method from parent -->
         <input class="btn btn-outline-success button-space big-button" type="submit" value="Add Recipe" />
       </form>
     </div>

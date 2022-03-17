@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-#nullable disable
+
 
 namespace CulinaryC3.Model
 {
@@ -29,8 +29,8 @@ namespace CulinaryC3.Model
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=tcp:cc98765.database.windows.net,1433;Initial Catalog=CookBook2;Persist Security Info=False;User ID=CulinaryC;Password=ShrimpTears5;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+
+                optionsBuilder.UseSqlServer("Server =.\\SQLExpress;Database=CookBook2;Trusted_Connection=True;ConnectRetryCount=0;");
             }
         }
 
@@ -92,6 +92,7 @@ namespace CulinaryC3.Model
             });
 
             modelBuilder.Entity<Recipe>(entity =>
+
             {
                 entity.Property(e => e.RecipeName).HasMaxLength(50);
 
@@ -102,6 +103,7 @@ namespace CulinaryC3.Model
             });
 
             modelBuilder.Entity<User>(entity =>
+
             {
                 entity.Property(e => e.LoginId).HasMaxLength(450);
 

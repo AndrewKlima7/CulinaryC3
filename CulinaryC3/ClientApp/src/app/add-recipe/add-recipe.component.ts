@@ -8,6 +8,7 @@ import { DBIngredient } from 'src/DBIngredient';
 import { NgForm, NgModel } from '@angular/forms';
 import { UserService } from '../../UserService';
 import { UploadService } from '../upload.service';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-add-recipe',
@@ -40,6 +41,7 @@ export class AddRecipeComponent {
   recName: string;
   dbIng: DBIngredient;
   userIngredient: DBIngredient;
+  fileToUpload: File = null;
   response: { dbPath: '' }
   ste4: boolean = false;
   ste5: boolean = false;
@@ -52,6 +54,7 @@ export class AddRecipeComponent {
   imageName: string = "";
   sas = "sp=rac&st=2021-08-11T17:11:10Z&se=2021-09-09T01:11:10Z&spr=https&sv=2020-08-04&sr=c&sig=sh8RQD%2BL6gUEL7P9iMJaddZ6jRKu%2FxZajWbhts73MGI%3D"
   message: string;
+  serv: number;
 
   constructor(private SpoonApi: SpoonacularAPI, private recServ: RecipeService, private userService: UserService, private blobService: UploadService) {
     //will get the userName / Email from the login of identity
@@ -83,7 +86,8 @@ export class AddRecipeComponent {
   //Pulls ingredient from list using ID from above, to access all details
   GetIngredient(id: number): any {
     this.SpoonApi.GetFoodFromId(id).subscribe((Ingredient) => {
-      this.ing = Ingredient; console.log(this.ing); console.log(this.ing.name);
+      this.ing = Ingredient;
+      console.log(this.ing);
       return this.ing;
     });
   }
@@ -111,6 +115,9 @@ export class AddRecipeComponent {
   ConfirmRecipe() {
     document.getElementById("recipe").innerHTML = "<h3>Your recipe has been submitted</h3> <br> <a href='all-recipes'>View All Recipes</a>";
   }
+  ConfirmDir(){
+    document.getElementById("dir").innerHTML = "<h3>Directions have been added!</h3>";
+  }
   AddToIngArray(form: NgForm) {
     this.dbIng = {
       id: null,
@@ -127,6 +134,7 @@ export class AddRecipeComponent {
     this.recServ.getRecipeByName(this.recName).subscribe((Recipe2) => {
       let r2: Recipe = Recipe2;
       this.dbIng.recipeId = r2.id;
+      console.log(this.unit);
     })
     this.amount = form.form.value.amount;
     this.unit = form.form.value.unit;
@@ -150,30 +158,25 @@ export class AddRecipeComponent {
     this.dbIng.unit = this.unit;
     this.dbIng.item = this.ing.name;
     this.iList.push(this.dbIng);
-    console.log(this.iList);
-    console.log()
+
   }
   ConvertUnits(unitCon: number) {
     for (var k = 0; k < this.ing.nutrition.nutrients.length; k++) {
-      if (this.ing.nutrition.nutrients[k].title === 'Carbohydrates') {
+      if (this.ing.nutrition.nutrients[k].name === 'Carbohydrates') {
         let carb: number = (this.ing.nutrition.nutrients[k].amount / this.ing.nutrition.weightPerServing.amount) * unitCon * this.amount;
         this.dbIng.carbs = carb;
-        console.log(carb);
       }
-      if (this.ing.nutrition.nutrients[k].title === 'Fat') {
+      if (this.ing.nutrition.nutrients[k].name === 'Fat') {
         let fat: number = (this.ing.nutrition.nutrients[k].amount / this.ing.nutrition.weightPerServing.amount) * unitCon * this.amount;
         this.dbIng.fats = fat;
-        console.log(fat);
       }
-      if (this.ing.nutrition.nutrients[k].title === 'Protein') {
+      if (this.ing.nutrition.nutrients[k].name === 'Protein') {
         let prot: number = (this.ing.nutrition.nutrients[k].amount / this.ing.nutrition.weightPerServing.amount) * unitCon * this.amount;
         this.dbIng.protein = prot;
-        console.log(prot);
       }
-      if (this.ing.nutrition.nutrients[k].title === 'Calories') {
+      if (this.ing.nutrition.nutrients[k].name === 'Calories') {
         let cal: number = (this.ing.nutrition.nutrients[k].amount / this.ing.nutrition.weightPerServing.amount) * unitCon * this.amount;
         this.dbIng.calories = cal;
-        console.log(cal);
       }
     }
   }
@@ -186,11 +189,16 @@ export class AddRecipeComponent {
     this.iList.splice(index, 1);
   }
   UpdateRecipe(form: NgForm) {
-    let serv: number = form.form.value.servings;
+    if(form.form.value.servings !== null){
+      this.serv = form.form.value.servings;
+    }
+    else{
+      this.serv = 1;
+    }
+    let newPath: string = this.response.dbPath.slice(17);
 
-    this.recServ.updateRecipe(this.recName, this.des, serv, this.imageName)
-
-      .subscribe(result => { console.log(result) });
+    this.recServ.updateRecipe(this.recName, this.des, this.serv, newPath)
+      .subscribe();
   }
 
 
@@ -222,11 +230,15 @@ export class AddRecipeComponent {
     })
   }
 
-  public imageSelected(file: File) {
+ imageSelected(file: File) {
+    console.log(file.name);
     this.blobService.uploadImage(this.sas, file, file.name, () => {
       console.log(file.name);
       this.imageName = file.name;
     })
+  }
+  uploadFinished = (event) => {
+    this.response = event;
   }
 
   step4() {

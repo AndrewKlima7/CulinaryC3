@@ -129,10 +129,11 @@ namespace CulinaryC.Controllers
             User u = db.Users.Where(x => x.Id == r.UserId).ToList().First();
             u.Score = u.Score + 20;
             db.Users.Update(u);
-            string newPath = "https://recipephotos.blob.core.windows.net/photos/photos/" + image;
+            // string newPath = "https://recipephotos.blob.core.windows.net/photos/photos/" + image;
             r.Description = desc;
             r.Servings = serv;
-            r.Picture = newPath;
+            // r.Picture = newPath;
+            r.Picture = "resources/images/" + image;
             db.Recipes.Update(r);
             db.SaveChanges();
         }
